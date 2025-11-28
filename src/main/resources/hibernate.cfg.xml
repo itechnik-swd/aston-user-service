@@ -7,7 +7,7 @@
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/userdb</property>
-        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.username">aston_student</property>
         <property name="hibernate.connection.password">password</property>
 
         <!-- JDBC connection pool settings -->
