@@ -1,5 +1,6 @@
 package ru.astondevs.service;
 
+import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.astondevs.dao.UserDao;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+@AllArgsConstructor
 public class UserService {
     private static final Logger logger = LogManager.getLogger(UserService.class);
 
@@ -62,20 +64,26 @@ public class UserService {
         try {
             System.out.println("\n=== Get User by ID ===");
             System.out.print("Enter user ID: ");
-            Long id = Long.parseLong(scanner.nextLine());
+
+            long id;
+            try {
+                id = Long.parseLong(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Error: ID must be a valid number!");
+                logger.warn("Invalid ID input", e);
+                return; // Завершаем метод при невалидном вводе
+            }
 
             Optional<User> user = userDao.findById(id);
             if (user.isPresent()) {
-                System.out.println("\nUser found:" + user.get());
+                System.out.println("User found: " + user.get());
             } else {
-                System.out.println("User not found with ID:" + id);
+                System.out.println("User not found with ID: " + id);
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Error: ID must be a valid number!");
-            System.out.println("Invalid ID input" + e);
+
         } catch (Exception e) {
-            System.out.println("Error retrieving user:" + e.getMessage());
-            System.out.println("Error in getUserById" + e);
+            System.out.println("Error retrieving user: " + e.getMessage());
+            logger.error("Error in getUserById", e);
         }
     }
 
