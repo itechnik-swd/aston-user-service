@@ -48,17 +48,23 @@ public class UserService {
                 return;
             }
 
-            System.out.print("Enter new user age: ");
-            int age = Integer.parseInt(scanner.nextLine());
-
-            if (age < 0) {
-                System.out.println("\nError: Age cannot be negative!");
+            if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+                System.out.println("\nError: Invalid email format!");
+                System.out.println("Example: example@example.com");
                 return;
             }
 
             Optional<User> existingUser = userDao.findByEmail(email);
             if (existingUser.isPresent()) {
                 System.out.println("\nError: User with this email already exists!");
+                return;
+            }
+
+            System.out.print("Enter new user age: ");
+            int age = Integer.parseInt(scanner.nextLine());
+
+            if (age < 0) {
+                System.out.println("\nError: Age cannot be negative!");
                 return;
             }
 
