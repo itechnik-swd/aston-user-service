@@ -32,13 +32,13 @@ public class UserService {
     public void createUser() {
         try {
             System.out.println("\n=== Create New User ===");
-            System.out.println("Enter new user name: ");
+            System.out.print("Enter new user name: ");
             String name = scanner.nextLine();
 
-            System.out.println("Enter new user email: ");
+            System.out.print("Enter new user email: ");
             String email = scanner.nextLine();
 
-            System.out.println("Enter new user age: ");
+            System.out.print("Enter new user age: ");
             int age = Integer.parseInt(scanner.nextLine());
 
             Optional<User> existingUser = userDao.findByEmail(email);
@@ -107,7 +107,7 @@ public class UserService {
     public void updateUser() {
         try {
             System.out.println("\n=== Update User ===");
-            System.out.println("Enter user ID to update: ");
+            System.out.print("Enter user ID to update: ");
             Long id = Long.parseLong(scanner.nextLine());
 
             Optional<User> userOpt = userDao.findById(id);
@@ -119,13 +119,13 @@ public class UserService {
             User user = userOpt.get();
             System.out.println("Current user:" + user);
 
-            System.out.println("Enter new name (current: " + user.getName() + "):");
+            System.out.print("Enter new name (current: " + user.getName() + "):");
             String name = scanner.nextLine();
             if (!name.trim().isEmpty()) {
                 user.setName(name);
             }
 
-            System.out.println("Enter new email (current: " + user.getEmail() + "):");
+            System.out.print("Enter new email (current: " + user.getEmail() + "):");
             String email = scanner.nextLine();
             if (!email.trim().isEmpty()) {
                 Optional<User> existingUser = userDao.findByEmail(email);

@@ -7,7 +7,7 @@
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/userdb</property>
-        <property name="hibernate.connection.username">aston_student</property>
+        <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">password</property>
 
         <!-- JDBC connection pool settings -->
@@ -21,7 +21,10 @@
         <property name="hibernate.format_sql">true</property>
 
         <!-- Auto create/update tables -->
-        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Import SQL file on startup -->
+        <property name="hibernate.hbm2ddl.import_files">import.sql</property>
 
         <!-- Current session context -->
         <property name="hibernate.current_session_context_class">thread</property>

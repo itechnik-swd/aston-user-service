@@ -21,7 +21,6 @@ public class UserDaoImpl implements UserDao {
             transaction = session.beginTransaction();
             session.persist(user);
             transaction.commit();
-            System.out.println("User saved successfully with ID:" + user.getId());
             return user.getId();
         } catch (Exception e) {
             if (transaction != null) {
