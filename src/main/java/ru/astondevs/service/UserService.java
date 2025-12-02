@@ -35,11 +35,26 @@ public class UserService {
             System.out.print("Enter new user name: ");
             String name = scanner.nextLine();
 
+            if (name.trim().isEmpty()) {
+                System.out.println("\nError: Name cannot be empty!");
+                return;
+            }
+
             System.out.print("Enter new user email: ");
             String email = scanner.nextLine();
 
+            if (email.trim().isEmpty()) {
+                System.out.println("\nError: Email cannot be empty!");
+                return;
+            }
+
             System.out.print("Enter new user age: ");
             int age = Integer.parseInt(scanner.nextLine());
+
+            if (age < 0) {
+                System.out.println("\nError: Age cannot be negative!");
+                return;
+            }
 
             Optional<User> existingUser = userDao.findByEmail(email);
             if (existingUser.isPresent()) {
@@ -52,8 +67,8 @@ public class UserService {
             System.out.println("User created successfully with ID:" + id);
 
         } catch (NumberFormatException e) {
+            logger.warn("Invalid age input in create", e);
             System.out.println("Error: Age must be a valid number!");
-            System.out.println("Invalid age input" + e);
         } catch (Exception e) {
             System.out.println("Error creating user:" + e.getMessage());
             System.out.println("Error in createUser" + e);
